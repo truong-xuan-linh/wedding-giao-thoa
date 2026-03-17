@@ -1,6 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { weddingData } from '@/data/weddingData'
+import { SvgLotus, SvgPin, SvgClock } from '@/components/Icons'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -50,7 +51,7 @@ export default function Footer() {
         {/* Divider */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
           <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, transparent, rgba(184,134,11,0.3))' }} />
-          <span style={{ color: 'var(--gold)', fontSize: '16px' }}>🌸</span>
+          <SvgLotus size={18} color="var(--gold)" />
           <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, rgba(184,134,11,0.3), transparent)' }} />
         </div>
 
@@ -82,9 +83,15 @@ export default function Footer() {
             color: 'rgba(253,246,227,0.55)',
             lineHeight: 1.8,
           }}>
-            📍 {weddingData.wedding.venue.name}<br />
+            <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: '5px' }}>
+              <SvgPin size={13} color="rgba(253,246,227,0.45)" style={{ flexShrink: 0 }} />
+              {weddingData.wedding.venue.name}
+            </span><br />
             {weddingData.wedding.venue.address}<br />
-            ⏰ {weddingData.wedding.time} · {weddingData.wedding.dateDisplay}
+            <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: '5px' }}>
+              <SvgClock size={13} color="rgba(253,246,227,0.45)" style={{ flexShrink: 0 }} />
+              {weddingData.wedding.time} · {weddingData.wedding.dateDisplay}
+            </span>
           </p>
         </div>
 

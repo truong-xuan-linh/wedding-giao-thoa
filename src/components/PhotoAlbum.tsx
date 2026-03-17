@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { weddingData } from '@/data/weddingData'
+import { SvgLantern } from '@/components/Icons'
 
 export default function PhotoAlbum() {
   const [selected, setSelected] = useState<number | null>(null)
@@ -41,7 +42,7 @@ export default function PhotoAlbum() {
             Khoảnh Khắc Đáng Nhớ
           </p>
           <h2 className="section-title-vn">Album Ảnh Cưới</h2>
-          <div className="lotus-divider"><span>🏮</span></div>
+          <div className="lotus-divider"><SvgLantern size={22} color="var(--gold)" /></div>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink-light)', fontStyle: 'italic' }}>
             Nhấn vào ảnh để xem toàn màn hình
           </p>

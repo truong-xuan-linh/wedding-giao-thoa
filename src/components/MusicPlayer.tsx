@@ -1,5 +1,6 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
+import { SvgFan } from '@/components/Icons'
 
 interface MusicPlayerProps {
   autoPlay?: boolean
@@ -101,12 +102,12 @@ export default function MusicPlayer({ autoPlay = false }: MusicPlayerProps) {
           alignItems: 'center',
           justifyContent: 'center',
           boxShadow: '0 4px 16px rgba(44,36,22,0.3)',
-          fontSize: '22px',
-          transition: 'all 0.3s',
+            transition: 'all 0.3s',
           animation: playing ? 'rotate-slow 8s linear infinite' : 'none',
         }}
       >
-        🪭
+        <SvgFan size={24}
+          color={playing ? 'var(--gold-shine)' : 'var(--lacquer-red)'} />
       </button>
       <span style={{
         fontSize: '9px',

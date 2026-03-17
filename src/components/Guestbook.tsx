@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { SvgLantern, SvgFlame, SvgWarning, SvgHeart } from '@/components/Icons'
 
 interface Wish {
   id: string
@@ -144,7 +145,7 @@ export default function Guestbook() {
                 background: 'var(--gold)',
                 borderRadius: '3px 3px 0 0',
               }} />
-              <span style={{ fontSize: '12px', opacity: 0.9 }}>🕯️</span>
+              <SvgFlame size={12} color="rgba(255,220,100,0.85)" />
               {/* Bottom tassel */}
               <div style={{
                 position: 'absolute', bottom: '-10px', left: '50%',
@@ -195,11 +196,11 @@ export default function Guestbook() {
             fontFamily: 'var(--font-body)', fontSize: '13px',
             color: 'rgba(253,246,227,0.55)', fontStyle: 'italic',
           }}>
-            Lời chúc của bạn sẽ bay lên trời như những chiếc đèn lồng Hội An ✨
+            Lời chúc của bạn sẽ bay lên trời như những chiếc đèn lồng Hội An
           </p>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', margin: '16px 0' }}>
             <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, transparent, rgba(184,134,11,0.4))' }} />
-            <span style={{ color: 'var(--gold)', fontSize: '20px' }}>🏮</span>
+            <SvgLantern size={22} color="var(--gold)" />
             <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, rgba(184,134,11,0.4), transparent)' }} />
           </div>
         </motion.div>
@@ -271,7 +272,9 @@ export default function Guestbook() {
           </div>
           {error && (
             <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: '#ff6b6b', marginBottom: '12px' }}>
-              ⚠️ {error}
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                <SvgWarning size={14} color="#ff6b6b" /> {error}
+              </span>
             </p>
           )}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -281,7 +284,11 @@ export default function Guestbook() {
               className="btn-gold"
               style={{ minWidth: '200px', opacity: loading ? 0.7 : 1 }}
             >
-              {loading ? '⏳ Đang gửi...' : '🏮 Thả Đèn Lồng'}
+              {loading ? 'Đang gửi...' : (
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                  <SvgLantern size={16} color="var(--gold-shine)" /> Thả Đèn Lồng
+                </span>
+              )}
             </button>
           </div>
           <AnimatePresence>
@@ -298,12 +305,17 @@ export default function Guestbook() {
                   gap: '12px',
                 }}
               >
-                <div style={{ fontSize: '48px', animation: 'float-gentle 2s ease-in-out infinite' }}>🏮</div>
+                <div style={{ animation: 'float-gentle 2s ease-in-out infinite' }}>
+                  <SvgLantern size={52} color="var(--gold-shine)" />
+                </div>
                 <p style={{ fontFamily: 'var(--font-accent)', fontSize: 'clamp(16px,3vw,22px)', color: 'var(--gold-shine)' }}>
                   Đèn lồng đã bay lên!
                 </p>
                 <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(253,246,227,0.7)', fontStyle: 'italic' }}>
-                  Lời chúc của bạn đã được gửi tới cô dâu chú rể 💕
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                    Lời chúc của bạn đã được gửi tới cô dâu chú rể
+                    <SvgHeart size={14} color="var(--lotus-pink)" />
+                  </span>
                 </p>
               </motion.div>
             )}
@@ -335,7 +347,7 @@ export default function Guestbook() {
                     {w.relation}
                   </p>
                 </div>
-                <span style={{ fontSize: '20px', opacity: 0.6 }}>🏮</span>
+                <SvgLantern size={20} color="var(--gold)" style={{ opacity: 0.6 }} />
               </div>
               <p style={{
                 fontFamily: 'var(--font-body)',

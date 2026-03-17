@@ -2,6 +2,7 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { weddingData } from '@/data/weddingData'
+import { SvgLotus, TimelineIcon } from '@/components/Icons'
 
 export default function LoveStoryTimeline() {
   return (
@@ -32,7 +33,7 @@ export default function LoveStoryTimeline() {
             Hành Trình Của Chúng Tôi
           </p>
           <h2 className="section-title-vn">Chuyện Tình Yêu</h2>
-          <div className="lotus-divider"><span>🌺</span></div>
+          <div className="lotus-divider"><SvgLotus size={22} color="var(--gold)" /></div>
         </motion.div>
 
         {/* Timeline */}
@@ -111,7 +112,7 @@ export default function LoveStoryTimeline() {
                 {/* Content */}
                 <div style={{ padding: '16px 20px 20px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                    <span style={{ fontSize: '20px' }}>{item.icon}</span>
+                    <TimelineIcon id={item.icon} size={22} color="var(--lacquer-red)" />
                     <h3 style={{
                       fontFamily: 'var(--font-display)',
                       fontSize: 'clamp(14px, 2vw, 17px)',

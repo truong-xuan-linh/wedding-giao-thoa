@@ -1,8 +1,52 @@
 'use client'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { SvgDoubleHappiness, SvgLotus, SvgPeachBlossom, SvgLantern, SvgRefresh } from '@/components/Icons'
 
 type Phase = 'closed' | 'opening' | 'open'
+
+const CONFETTI_COLORS = [
+  'var(--lotus-pink)', 'var(--gold)', 'var(--lacquer-red)',
+  'var(--gold-shine)', 'rgba(220,120,138,0.8)',
+]
+
+function ConfettiItem({ symbolType, color, size, left, delay, duration }: {
+  symbolType: number; color: string; size: number
+  left: number; delay: number; duration: number
+}) {
+  const props = { size, color }
+  const symbol = symbolType % 3 === 0 ? <SvgLotus {...props} />
+    : symbolType % 3 === 1 ? <SvgPeachBlossom {...props} />
+    : <SvgLantern {...props} />
+  return (
+    <div style={{
+      position: 'absolute',
+      left: `${left}%`, top: '40%',
+      animation: `petal-fall ${duration}s ${delay}s ease-out forwards`,
+    }}>
+      {symbol}
+    </div>
+  )
+}
+
+function ConfettiLayer() {
+  const items = useMemo(() =>
+    Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      left: 30 + (i * 2.1) % 40,
+      delay: (i * 0.13) % 0.5,
+      duration: 1.5 + (i * 0.17) % 1.5,
+      size: 14 + (i % 4) * 4,
+      symbolType: i % 3,
+      color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+    }))
+  , [])
+  return (
+    <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 10 }}>
+      {items.map(item => <ConfettiItem key={item.id} {...item} />)}
+    </div>
+  )
+}
 
 export default function LixiBox() {
   const [phase, setPhase] = useState<Phase>('closed')
@@ -41,19 +85,7 @@ export default function LixiBox() {
     }}>
       {/* Confetti explosion */}
       {showConfetti && (
-        <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 10 }}>
-          {Array.from({ length: 20 }, (_, i) => (
-            <div key={i} style={{
-              position: 'absolute',
-              left: `${30 + Math.random() * 40}%`,
-              top: '40%',
-              fontSize: `${16 + Math.random() * 16}px`,
-              animation: `petal-fall ${1.5 + Math.random() * 1.5}s ${Math.random() * 0.5}s ease-out forwards`,
-            }}>
-              {['🌸','✨','🎊','🏮','🌺','💛'][Math.floor(Math.random() * 6)]}
-            </div>
-          ))}
-        </div>
+        <ConfettiLayer />
       )}
 
       {/* Background gold pattern */}
@@ -129,10 +161,9 @@ export default function LixiBox() {
                     background: 'radial-gradient(circle, rgba(212,160,23,0.9), rgba(140,90,0,0.7))',
                     border: '2px solid rgba(255,215,0,0.5)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: '36px',
                     boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
                   }}>
-                    🎁
+                    <SvgDoubleHappiness size={44} color="var(--gold-shine)" />
                   </div>
                 )}
 
@@ -245,9 +276,9 @@ export default function LixiBox() {
               transition={{ delay: 1.2 }}
               onClick={reset}
               className="btn-lacquer"
-              style={{ marginTop: '200px', fontSize: '12px' }}
+              style={{ marginTop: '200px', fontSize: '12px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
             >
-              🔄 Đóng lại
+              <SvgRefresh size={13} color="currentColor" /> Đóng lại
             </motion.button>
           )}
         </div>

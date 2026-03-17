@@ -2,11 +2,11 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { weddingData } from '@/data/weddingData'
+import { SvgLotus, GameSymbol, SvgTarget, SvgClock, SvgRefresh, SvgTrophy } from '@/components/Icons'
 
 interface Card {
   id: number
   symbolId: string
-  emoji: string
   name: string
   flipped: boolean
   matched: boolean
@@ -23,8 +23,8 @@ function shuffle<T>(arr: T[]): T[] {
 
 function buildDeck(): Card[] {
   const pairs = weddingData.miniGameSymbols.flatMap(s => [
-    { symbolId: s.id, emoji: s.emoji, name: s.name },
-    { symbolId: s.id, emoji: s.emoji, name: s.name },
+    { symbolId: s.id, name: s.name },
+    { symbolId: s.id, name: s.name },
   ])
   return shuffle(pairs).map((p, i) => ({ id: i, ...p, flipped: false, matched: false }))
 }
@@ -136,7 +136,7 @@ export default function MiniGame() {
             Thử Tài Trí Nhớ
           </p>
           <h2 className="section-title-vn">Ghép Đôi Uyên Ương</h2>
-          <div className="lotus-divider"><span>🌺</span></div>
+          <div className="lotus-divider"><SvgLotus size={22} color="var(--gold)" /></div>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink-light)', fontStyle: 'italic' }}>
             Tìm các cặp biểu tượng văn hoá Việt Nam trong {TOTAL_TIME} giây!
           </p>
@@ -173,7 +173,7 @@ export default function MiniGame() {
                     color: 'var(--ink)',
                     display: 'flex', gap: '6px', alignItems: 'center',
                   }}>
-                    <span>{s.emoji}</span>
+                    <GameSymbol id={s.id} size={20} color="var(--lacquer-red)" />
                     <span>{s.name}</span>
                   </div>
                 ))}
@@ -191,8 +191,9 @@ export default function MiniGame() {
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                 marginBottom: '20px', flexWrap: 'wrap', gap: '12px',
               }}>
-                <div style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink)' }}>
-                  🎯 Đã ghép: <strong style={{ color: 'var(--lacquer-red)' }}>{matchedCount}/{weddingData.miniGameSymbols.length}</strong>
+                <div style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink)', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                  <SvgTarget size={15} color="var(--lacquer-red)" />
+                  Đã ghép: <strong style={{ color: 'var(--lacquer-red)' }}>{matchedCount}/{weddingData.miniGameSymbols.length}</strong>
                 </div>
                 <div style={{
                   fontFamily: 'var(--font-display)',
@@ -202,11 +203,13 @@ export default function MiniGame() {
                   fontStyle: 'italic',
                   minWidth: '80px',
                   textAlign: 'center',
+                  display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'center',
                 }}>
-                  ⏱ {timeLeft}s
+                  <SvgClock size={18} color={timerColor} /> {timeLeft}s
                 </div>
-                <div style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink)' }}>
-                  🔄 Lượt: <strong style={{ color: 'var(--jade)' }}>{moves}</strong>
+                <div style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink)', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                  <SvgRefresh size={14} color="var(--jade)" />
+                  Lượt: <strong style={{ color: 'var(--jade)' }}>{moves}</strong>
                 </div>
               </div>
               {/* Timer bar */}
@@ -241,11 +244,11 @@ export default function MiniGame() {
                         border: '1px solid rgba(184,134,11,0.5)',
                         boxShadow: card.matched ? 'none' : '0 4px 12px rgba(0,0,0,0.2)',
                       }}>
-                        <span style={{
-                          fontSize: 'clamp(18px, 4vw, 28px)',
-                          opacity: 0.6,
-                          color: 'rgba(184,134,11,0.7)',
-                        }}>🌸</span>
+                        <SvgLotus
+                          size={Math.min(28, 28)}
+                          color="rgba(184,134,11,0.6)"
+                          style={{ opacity: 0.7 }}
+                        />
                       </div>
                       {/* Back (symbol) */}
                       <div className="game-card-back" style={{
@@ -257,7 +260,8 @@ export default function MiniGame() {
                         flexDirection: 'column',
                         gap: '4px',
                       }}>
-                        <span style={{ fontSize: 'clamp(22px, 5vw, 36px)' }}>{card.emoji}</span>
+                        <GameSymbol id={card.symbolId} size={36}
+                          color={card.matched ? 'rgba(255,255,255,0.9)' : 'var(--ink)'} />
                         <span style={{
                           fontFamily: 'var(--font-body)',
                           fontSize: 'clamp(7px, 1.5vw, 10px)',
@@ -282,8 +286,10 @@ export default function MiniGame() {
               <motion.div
                 animate={{ rotate: [0, 10, -10, 10, 0], scale: [1, 1.2, 1] }}
                 transition={{ duration: 0.8 }}
-                style={{ fontSize: '72px', marginBottom: '20px' }}
-              >🏆</motion.div>
+                style={{ marginBottom: '20px', display: 'flex', justifyContent: 'center' }}
+              >
+                <SvgTrophy size={72} color="var(--gold)" />
+              </motion.div>
               <h3 style={{
                 fontFamily: 'var(--font-display)', fontStyle: 'italic',
                 fontSize: 'clamp(22px, 4vw, 32px)',
@@ -301,8 +307,8 @@ export default function MiniGame() {
                 padding: '12px 32px',
                 marginBottom: '20px',
               }}>
-                <span style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: '20px', color: 'var(--gold-shine)' }}>
-                  ✨ {score.toLocaleString()} điểm
+                <span style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: '20px', color: 'var(--gold-shine)', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                  ✦ {score.toLocaleString()} điểm
                 </span>
               </div>
               <p style={{
@@ -311,8 +317,8 @@ export default function MiniGame() {
               }}>
                 {moves} lượt · còn {timeLeft}s · Như tình yêu của Minh Quân &amp; Lan Anh – hoàn hảo!
               </p>
-              <button onClick={startGame} className="btn-gold" style={{ fontSize: '14px', padding: '12px 40px' }}>
-                🔄 Chơi Lại
+              <button onClick={startGame} className="btn-gold" style={{ fontSize: '14px', padding: '12px 40px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                <SvgRefresh size={14} color="currentColor" /> Chơi Lại
               </button>
             </motion.div>
           )}

@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { weddingData } from '@/data/weddingData'
+import { SvgLotus, SvgPin } from '@/components/Icons'
 
 export default function CoupleMessage() {
   const [active, setActive] = useState<'groom' | 'bride'>('groom')
@@ -45,7 +46,7 @@ export default function CoupleMessage() {
           </h2>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', margin: '16px 0 24px' }}>
             <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, transparent, rgba(184,134,11,0.5))' }} />
-            <span style={{ color: 'var(--gold)', fontSize: '18px' }}>🌸</span>
+            <SvgLotus size={20} color="var(--gold)" />
             <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, rgba(184,134,11,0.5), transparent)' }} />
           </div>
         </motion.div>
@@ -182,7 +183,9 @@ export default function CoupleMessage() {
                 Con trai/gái của<br />
                 <span style={{ color: 'rgba(253,246,227,0.8)' }}>{p.family.father}</span><br />
                 <span style={{ color: 'rgba(253,246,227,0.8)' }}>{p.family.mother}</span><br />
-                <span style={{ color: 'rgba(184,134,11,0.6)', fontSize: '11px' }}>📍 {p.family.address}</span>
+                <span style={{ color: 'rgba(184,134,11,0.6)', fontSize: '11px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                  <SvgPin size={11} color="rgba(184,134,11,0.6)" />{p.family.address}
+                </span>
               </p>
             </div>
           ))}

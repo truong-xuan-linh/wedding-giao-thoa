@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { SvgLantern, SvgDoubleHappiness } from '@/components/Icons'
 
 interface EnvelopeIntroProps {
   guestName: string | null
@@ -73,10 +74,12 @@ export default function EnvelopeIntro({ guestName, onComplete }: EnvelopeIntroPr
             left: `${10 + i * 16}%`,
             bottom: '8%',
             animation: `float-up ${8 + i * 2}s ${i * 1.5}s ease-in-out infinite`,
-            opacity: 0.5,
-            fontSize: '26px',
+            opacity: 0.45,
             pointerEvents: 'none',
-          }}>🏮</div>
+          }}>
+            <SvgLantern size={28}
+              color={['#C0392B','#E67E22','#8E44AD','#1ABC9C','#D4A017','#A80000'][i]} />
+          </div>
         ))}
 
         {/* L'Amour branding */}
@@ -195,10 +198,9 @@ export default function EnvelopeIntro({ guestName, onComplete }: EnvelopeIntroPr
                   border: '3px solid rgba(212,160,23,0.55)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   boxShadow: '0 4px 14px rgba(0,0,0,0.45), inset 0 2px 4px rgba(255,255,255,0.15)',
-                  fontSize: '26px',
-                }}
+                  }}
               >
-                ❤️
+                <SvgDoubleHappiness size={34} color="var(--gold-shine)" />
               </motion.div>
             </div>
           </div>

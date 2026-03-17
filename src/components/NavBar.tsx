@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { SvgMenu, SvgClose } from '@/components/Icons'
 
 const navLinks = [
   { href: '#countdown', label: 'Đếm Ngược' },
@@ -103,12 +104,15 @@ export default function NavBar() {
           style={{
             display: 'none',
             background: 'none', border: 'none', cursor: 'pointer',
-            fontSize: '24px',
+            padding: '2px',
             color: scrolled ? 'var(--lacquer-red)' : 'var(--cream)',
           }}
           className="nav-mobile-btn"
         >
-          {menuOpen ? '✕' : '☰'}
+          {menuOpen
+            ? <SvgClose size={22} color={scrolled ? 'var(--lacquer-red)' : 'var(--cream)'} />
+            : <SvgMenu size={22} color={scrolled ? 'var(--lacquer-red)' : 'var(--cream)'} />
+          }
         </button>
       </div>
 

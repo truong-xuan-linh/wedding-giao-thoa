@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { weddingData } from '@/data/weddingData'
+import { SvgLotus, SvgMoon, SvgFirework } from '@/components/Icons'
 
 interface TimeLeft {
   days: number
@@ -171,7 +172,7 @@ export default function CountdownSection() {
             Còn Bao Lâu Nữa?
           </h2>
           <div className="lotus-divider">
-            <span>🪷</span>
+            <SvgLotus size={22} color="var(--gold)" />
           </div>
           <p style={{
             fontFamily: 'var(--font-body)',
@@ -189,7 +190,9 @@ export default function CountdownSection() {
             animate={{ opacity: 1, scale: 1 }}
             style={{ textAlign: 'center', padding: '40px' }}
           >
-            <div style={{ fontSize: '64px', marginBottom: '16px' }}>🎉</div>
+            <div style={{ marginBottom: '16px', display: 'flex', justifyContent: 'center' }}>
+              <SvgFirework size={64} color="var(--lacquer-red)" />
+            </div>
             <h3 style={{
               fontFamily: 'var(--font-accent)',
               fontSize: 'clamp(28px, 6vw, 48px)',
@@ -266,7 +269,10 @@ export default function CountdownSection() {
             color: 'var(--ink-light)',
             fontStyle: 'italic',
           }}>
-            🌙 Âm lịch: {weddingData.wedding.lunarDate}
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <SvgMoon size={14} color="var(--ink-light)" />
+              Âm lịch: {weddingData.wedding.lunarDate}
+            </span>
           </span>
         </motion.div>
       </div>

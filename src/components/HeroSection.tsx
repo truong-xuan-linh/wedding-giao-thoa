@@ -2,6 +2,7 @@
 import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { SvgLotus, SvgArrowDown } from '@/components/Icons'
 
 interface HeroSectionProps {
   guestName: string | null
@@ -106,11 +107,10 @@ export default function HeroSection({ guestName }: HeroSectionProps) {
         ].map((pos, i) => (
           <div key={i} style={{
             position: 'absolute', ...pos as React.CSSProperties,
-            fontSize: pos.size,
             opacity: 0.3,
             animation: `float-gentle 4s ${pos.delay}s ease-in-out infinite`,
           }}>
-            🪷
+            <SvgLotus size={pos.size} color="var(--gold)" />
           </div>
         ))}
       </div>
@@ -150,7 +150,7 @@ export default function HeroSection({ guestName }: HeroSectionProps) {
           }}
         >
           <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, transparent, rgba(184,134,11,0.6))' }} />
-          <span style={{ color: 'var(--gold)', fontSize: '20px' }}>🌺</span>
+          <SvgLotus size={22} color="var(--gold)" />
           <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, rgba(184,134,11,0.6), transparent)' }} />
         </motion.div>
 
@@ -261,9 +261,8 @@ export default function HeroSection({ guestName }: HeroSectionProps) {
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
-            style={{ color: 'rgba(184,134,11,0.6)', fontSize: '20px' }}
           >
-            ↓
+            <SvgArrowDown size={20} color="rgba(184,134,11,0.6)" />
           </motion.div>
         </motion.div>
       </div>
